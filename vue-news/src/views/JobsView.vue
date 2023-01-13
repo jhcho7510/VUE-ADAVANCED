@@ -18,7 +18,7 @@ export default {
     .then(response => {
       this.users = response.data;
     })
-    .catch(function(error){console.log(error)})
+    .catch(error =>console.log(error))
   }
 }
 </script>
