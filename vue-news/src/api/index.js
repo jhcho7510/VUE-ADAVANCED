@@ -16,8 +16,13 @@ function fetchAskList() {
     return axios.get(`${config.baseUrl}ask/1.json`)
 }
 
-export { // export default 안됨.. 해봤음 ㅜ.ㅜ 2023.01.13
+function fetchUserInfo(username) {
+    return axios.get(`${config.baseUrl}user/${username}.json`);
+}
+
+export { 
     fetchNewsList,
     fetchJobsList,
-    fetchAskList
+    fetchAskList,
+    fetchUserInfo
 }

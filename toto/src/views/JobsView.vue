@@ -14,7 +14,17 @@
 // import {fetchJobsList} from '../api/index.js'
 import {mapGetters} from 'vuex';
 export default {
-    // data() {
+    
+	/******************************************************/
+	/*
+	 * data의 'users' 속성을 정의해서 쓰는 대신 STORE를 이용해 처리하며,
+	   처리시 store의 'getter'를 이용해서 데이터에 접근한다.
+	   Vuex에 'mapGetters'를 통해 getter로 접근해서 ./store/index.js에 정의되어 있는 'fetchdJobs' 
+	       getters:{
+              fetchedNews(state){ ...
+		에 접근한다.	  
+	 */
+	// data() {
     //     return {
     //         users: []
     //     }
@@ -24,6 +34,7 @@ export default {
             'fetchdJobs'
         ])
     },
+	/******************************************************/
     created() {
         this.$store.dispatch('FETCH_JOBS');
         // fetchJobsList()

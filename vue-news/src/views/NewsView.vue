@@ -1,26 +1,34 @@
 <template>
     <ul>
-        <li v-for="user in users" v-bind:key="user.title">{{user.title}}</li>
+        <!-- <li v-for="toto in newsInfo" v-bind:key="toto.title"> -->
+        <li v-for="toto in fetchedNews" v-bind:key="toto.title">
+          <a v-bind:href="toto.url">
+            {{toto.title}}
+          </a>
+          <small>
+            {{toto.time_ago}} by 
+            <router-link :to="`/user/${toto.user}`">{{toto.user}}</router-link>
+          </small>
+        </li>          
     </ul>
 </template>
 
 <script>
-import {fetchNewsList} from '../api/index.js';
+
+import {mapGetters} from 'vuex';
 
 export default {
-    data() {
-        return {
-            users:[]
+    computed : {
+        ...mapGetters([ 
+            'fetchedNews' // store(/store/index.js) getters의 fetchedNews Function과 매핑
+        ]),
+        newsInfo() {
+            return this.$store.state.news;
         }
+
     },
     created() {
-        // axios.get('https://api.hnpwa.com/v0/news/1.json')
-        fetchNewsList()
-        .then(response => {
-            console.log(response)
-            this.users = response.data;
-         })
-        .catch(function(error){console.log(error)})
+        this.$store.dispatch('FETCH_NEWS');
 
     }    
 }
