@@ -1,6 +1,8 @@
 <template>
-    <ul class="news-list">
-        <!-- <li v-for="user in users" v-bind:key="user.title">{{user.title}}</li>   -->
+    <div>
+        <list-item></list-item>
+    </div>
+    <!-- <ul class="news-list">
         <li v-for="toto in fetchedAsk" v-bind:key="toto.title" class="post">
             <div class="points">
                 {{toto.points}}
@@ -16,31 +18,25 @@
                 </small>
             </div>
         </li>         
-    </ul>
+    </ul> -->
 </template>
 
 <script>
 // import {fetchAskList} from '../api/index.js';
-import {mapGetters} from 'vuex';
+// import {mapGetters} from 'vuex';
+import ListItem from '../components/ListItem.vue';
 
 export default {
-    // data() {
-    //     return {
-    //         users:[],
-    //     }
-    // },
-    computed : {
-        ...mapGetters([
-            'fetchedAsk'
-        ])
-    },
-    created() {
-        this.$store.dispatch('FETCH_ASK');
-        // fetchAskList()
-        // .then(response => {
-        //     this.users = response.data;
-        // })
-        // .catch(error => {console.log(error)})
+    components : {
+        ListItem,
     }
+    // computed : {
+    //     ...mapGetters([
+    //         'fetchedAsk'
+    //     ])
+    // },
+    // created() {
+    //     this.$store.dispatch('FETCH_ASK');
+    // }
 }
 </script>

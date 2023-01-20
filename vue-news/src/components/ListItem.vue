@@ -1,21 +1,21 @@
 <template>
   <div>
     <ul class="news-list">
-        <li v-for="toto in fetchedNews" v-bind:key="toto.title" class="post">
+        <li v-for="toto in listItems" v-bind:key="toto.title" class="post">
             <!-- 포인트영역-->
             <div class="points">
-            {{toto.points}}
+            {{toto.points || 0}}
             </div>
             
             <!-- 기타 정보 영역-->
             <div>
-            <p class="news-title">
-                <a v-bind:href="toto.url">{{toto.title}}</a>
-            </p>
-            <small class="link-text">
-                {{toto.time_ago}} by 
-            <router-link :to="`/user/${toto.user}`" class="link-text">{{toto.user}}</router-link>
-            </small>
+                <p class="news-title">
+                    <a v-bind:href="toto.url">{{toto.title}}</a>
+                </p>
+                <small class="link-text">
+                    {{toto.time_ago}} by 
+                    <router-link :to="`/user/${toto.user}`" class="link-text">{{toto.user}}</router-link>
+                </small>
             </div>  
         </li>          
     </ul>      
@@ -25,7 +25,49 @@
 <script>
 export default {
   created() {
-      this.$store.dispatch('FETCH_NEWS');
+      // this.$store.dispatch('FETCH_NEWS');
+      const name = this.$route.name;
+      let bizName = '';
+      if(name === 'news') {
+        bizName = 'FETCH_NEWS';
+      }
+      else if(name === 'ask') {
+        bizName = 'FETCH_ASK';
+      }
+      if(name === 'jobs') {
+        bizName = 'FETCH_JOBS';
+      }
+      this.$store.dispatch(bizName);
+
+  },
+  computed : {
+
+    listItems() {
+        const name = this.$route.name;
+        let stateUri = '';
+        if(name === 'news') {
+            stateUri = this.$store.state.news;
+        } else if(name === 'ask') {
+            stateUri = this.$store.state.ask;
+        } else if(name === 'jobs') {
+            stateUri = this.$store.state.jobs;
+        }
+        return stateUri;
+      }
+    //   this.$store.state.news
+        
+    //   litsItems() {
+    // // let bizName = '';
+    //     if(name === 'news') {
+    //         return this.$store.state.news;
+    //     }
+    //     else if(name === 'ask') {
+    //         return this.$store.state.ask;
+    //     }
+    //     if(name === 'jobs') {
+    //         return this.$store.state.jobs;
+    //     }
+    //   }
   }   
 }
 </script>
