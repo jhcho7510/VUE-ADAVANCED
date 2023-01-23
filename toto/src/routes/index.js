@@ -32,7 +32,7 @@ export const router = new VueRouter({
                 .then(() =>{
                   // #5  
                   console.log('fetched');
-                  bus.$emit('end:spinner');
+                //   bus.$emit('end:spinner');
                   next();
                 })
                 .catch((error) => {
