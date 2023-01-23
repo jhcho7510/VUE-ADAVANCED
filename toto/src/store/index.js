@@ -1,6 +1,5 @@
 import Vue from 'vue';
 import Vuex from 'vuex';
-
 import mutations from './mutations.js';
 import actions from './actions.js';
 
@@ -13,8 +12,9 @@ export const store = new Vuex.Store({
         ask:[],
         user:{},
         item:{},
+        list:[],
     },
-    getters:{
+    getters: {
         fetchedNews(state){
             return state.news;
         },
@@ -24,12 +24,13 @@ export const store = new Vuex.Store({
         fetchedAsk(state) {
             return state.ask;
         },
-        fethchedUser(state){
+        fetchedUser(state) {
             return state.user;
         },
-        fetchedItem(state){
+        fetchedItem(state) {
             return state.item;
-        }
+        }        
+
     },
     mutations: mutations,
     actions: actions,

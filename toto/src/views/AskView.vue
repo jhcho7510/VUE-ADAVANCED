@@ -1,54 +1,53 @@
 <template>
-  <ul>
-    <!-- <li v-for="user in users" v-bind:key="user.title">{{user.title}}</li> -->
-    <!-- <li v-for="toto in this.$store.state.ask" v-bind:key="toto.title">{{toto.title}}</li> -->
-    <!-- <li v-for="toto in fetchedAsk" v-bind:key="toto.title">{{toto.title}}</li> -->
-     <li v-for="toto in fetchedAsk" v-bind:key="toto.title">
-    <!--
-        <a v-bind:href="toto.url">
-        <a :href="toto.url">
-        {{toto.title}}
-        </a> -->
-        <router-link :to="`item/${toto.id}`">
-                {{toto.title}}
-        </router-link>        
-        <small>{{toto.time_ago}}</small> by <small>{{toto.user}}</small>
-    </li>        
-</ul>
+    <div>
+        <list-item></list-item>
+    </div>
+    <!-- <ul class="news-list">
+        <li v-for="toto in fetchedAsk" v-bind:key="toto.title" class="post">
+            <div class="points">
+                {{toto.points}}
+            </div>            
+            <div>
+                <P class="news-title
+                ">
+                    <router-link :to="`item/${toto.id}`">{{toto.title}}</router-link>
+                </P>
+                <small class="link-text">
+                    {{toto.time_ago}} by
+                    <router-link :to="`user/${toto.user}`" class="link-text">{{toto.user}}</router-link>
+                </small>
+            </div>
+        </li>         
+    </ul> -->
 </template>
 
 <script>
 // import {fetchAskList} from '../api/index.js';
-import { mapGetters } from 'vuex';
-// import { mapState, mapGetters } from 'vuex';
+// import {mapGetters} from 'vuex';
+import ListItem from '../components/ListItem.vue';
+// import bus from '../utils/bus.js';
+import ListMixin from '../mixins/ListMixin.js';
+
 export default {
-    // data() {
-    //     return {
-    //         users:[]
-    //     }
-    // },
-    computed: {
-        ...mapGetters([
-            'fetchedAsk'
-    ])
-        // ...mapGetters({
-        //     askItems:'fetchedAsk'
-        // })
-        // ...mapState({
-        //     ask: state => state.ask,
-        // })
+    components : {
+        ListItem,
     },
-    created() {
-        this.$store.dispatch('FETCH_ASK');
-        // fetchAskList()
-        // .then(response => {
-        //     this.users = response.data;
-        // })
-        // .catch(error => {console.log(error)})        
-    }
+    mixins:[ListMixin],
+    // computed : {
+    //     ...mapGetters([
+    //         'fetchedAsk'
+    //     ])
+    // },
+    // created() {
+    //     bus.$emit('start:spinner');
+    //     this.$store.dispatch('FETCH_ASK')
+    //     .then(() =>{
+    //     console.log('fetched');
+    //     bus.$emit('end:spinner');
+    //     })
+    //     .catch((error) => {
+    //     console.log(error);
+    //     });
+    // }
 }
 </script>
-
-<style>
-
-</style>
