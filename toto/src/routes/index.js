@@ -27,22 +27,13 @@ export const router = new VueRouter({
             // component: createListView('NewsView'),
             beforeEnter: (to, from, next) =>{
                 bus.$emit('start:spinner');
-                // #1
                 store.dispatch('FETCH_LIST', to.name)
                 .then(() =>{
-                  // #5  
-                  console.log('fetched');
-                //   bus.$emit('end:spinner');
                   next();
                 })
                 .catch((error) => {
                   console.log(error);
                 });                
-                // console.log('to', to);
-                // console.log('from', from);
-                // console.log(next);
-
-                next();
             }
         },
         {
@@ -71,7 +62,7 @@ export const router = new VueRouter({
                 bus.$emit('start:spinner');
                 store.dispatch('FETCH_LIST', to.name)
                 .then(() => {
-                    bus.$emit('end:spinner');
+                    //bus.$emit('end:spinner');
                     next();
                 })
                 .catch((error) => {
